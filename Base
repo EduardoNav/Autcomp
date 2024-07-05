@@ -1,0 +1,52 @@
+import SwiftUI
+
+struct ContentView: View {
+    @State private var text = ""
+    @State private var predictiveText = ""
+    @State private var optionText = ""
+
+    let cities = ["Cancun", "Dallas", "Los Angeles", "London", "Houston"]
+
+    var body: some View {
+        VStack {
+            ZStack(alignment: .leading) {
+                Text(predictiveText)
+                    .foregroundColor(.gray)
+                    .font(.title)
+                    .padding()
+                TextField("Enter City", text: $text)
+                    .font(.title)
+                    .padding()
+                    .cornerRadius(10)
+                    .onChange(of: text) { newValue in
+                        predictiveText = cities.compactMap { city in
+                            if city.prefix(newValue.count).lowercased().contains(newValue.lowercased()) {
+                                return city
+                            } else {
+                                return nil
+                            }
+                        }.first ?? ""
+                        optionText = predictiveText
+                    }
+                    .onSubmit {
+                        text = predictiveText
+                        optionText = ""
+                    }
+            }
+            .padding()
+            HStack {
+                Text(optionText)
+                    .font(.subheadline)
+                    .padding(.leading)
+                Spacer()
+            }
+            Spacer()
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
