@@ -1,0 +1,6 @@
+Implementation Details
+State Management: Uses @State properties text and predictiveText to manage user input and predictive text.
+TextField and ZStack: A ZStack overlays the Text component with the TextField, providing real-time text suggestions.
+Predictive Text Logic: The onChange modifier updates predictiveText based on the user's input by filtering the cities array. The onSubmit modifier completes the text input with the predictive text.
+Conclusion
+This implementation enhances user experience by providing real-time text suggestions based on input. It uses state properties and SwiftUI's ZStack to create an intuitive and visually coherent predictive text feature.
